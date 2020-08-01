@@ -1,0 +1,59 @@
+!defn{opt} !end := {
+  <div class="chunk">
+    <div class="left-side">
+      definition
+    </div>
+    <div class="right-side">
+      <h3>{opt}</h3>
+      {content}
+    </div>
+  </div>
+}
+
+!prop{opt} !end := {
+  <div class="chunk">
+    <div class="left-side">
+      proposition
+    </div>
+    <div class="right-side">
+      <h3>{opt}</h3>
+      {content}
+    </div>
+  </div>
+}
+
+!ex{opt} !end := {
+  <div class="chunk">
+    <div class="left-side">
+      example
+    </div>
+    <div class="right-side">
+      <h3>{opt}</h3>
+      {content}
+    </div>
+  </div>
+}
+
+!thm{opt} !end := {
+  <div class="chunk">
+    <div class="left-side">
+      theorem
+    </div>
+    <div class="right-side">
+      <h3>{opt}</h3>
+      {content}
+    </div>
+  </div>
+}
+
+!proof{opt} !end := {
+  <div class="proof">
+    <div class="left-side">
+      proof
+    </div>
+    <div class="right-side">
+      <h3>{opt}</h3>
+      {content}
+    </div>
+  </div>
+}

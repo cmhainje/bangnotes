@@ -1,0 +1,151 @@
+!title An Introduction to Groups, Fields, and Rings
+
+# Groups
+!defn{Group}
+A **group** $(G, \cdot, e)$ is a set $G$ with a binary function $x \cdot y \in G$ for every $x,y \in G$ such that...
+
+- the operation is associative, i.e. $x \cdot (y \cdot z) = (x \cdot y) \cdot z$,
+- there exists an identity element $e$ such that $x \cdot e = e \cdot x = x$ for every $x \in G$, and
+- the operation is invertible, i.e. for every $x \in G$, there exists an element $y \in G$ such that $x \cdot y = e = y \cdot x$.
+
+(The fact that the product $x \cdot y \in G$ for all elements $x,y \in G$ is important, and is often expressed by saying that $G$ is **closed under** $\cdot$.)
+!end
+
+Generally, a group's operation $\cdot$ is called "multiplication", but it needn't always resemble the familiar form of multiplication. Some groups' operations are instead called "addition" and represented by a $+$. In this case, the identity is usually denoted $0$ instead of $e$.
+
+!prop
+The identity element of $G$ is unique.
+!proof
+Suppose that $e$ and $\tilde{e}$ are both identity elements in $G$. The defining property of identity elements is that $x \cdot e = e \cdot x = x$ for all $x \in G$, so consider $e \cdot \tilde{e}$. Because $e$ is an identity element, we see that $e \cdot \tilde{e} = \tilde{e}$. But because $\tilde{e}$ is an identity element, $e \cdot \tilde{e} = e$. Thus, $e = \tilde{e}$, and so there is only one identity element.
+!end
+!end
+
+!prop
+For every element $x \in G$, the inverse $x^{-1}$ is unique.
+!proof
+Suppose that both $y$ and $\tilde{y} \in G$ are inverses of $x$. Then
+\[
+  y
+  = y \cdot e
+  = y \cdot (x \cdot \tilde{y})
+  = (y \cdot x) \cdot \tilde{y}
+  = e \cdot \tilde{y}
+  = \tilde{y},
+\]
+so there is only one inverse.
+!end
+!end
+
+Note: the inverse of $x$ is usually denoted $x^{-1}$. For groups whose function is addition, however, it is usually denoted $-x$.
+
+!defn{Abelian group}
+A group $G$ is **abelian** if the group's operation is commutative (i.e. if $x \cdot y = y \cdot x$ for all elements $x,y \in G$).
+!end
+
+!ex
+$(\mathbb{Z}, +, 0)$, $(\mathbb{Q}, +, 0)$, $(\mathbb{R}, +, 0)$, and $(\mathbb{C}, +, 0)$ are all abelian groups.
+!end
+
+For groups whose operation is addition, we can define **subtraction**: $x - y \equiv x + (-y)$. For abelian multiplicative groups, we can define **division** by $x/y \equiv x \cdot y^{-1}$. Note that for non-abelian groups, we don't write $x/y$ because it's unclear whether this means $y^{-1} x$ or $x y^{-1}$, which are not necessarily equal.
+
+# Rings
+!defn{Ring}
+A **ring** is a set $R$ with two binary operations $+$ and $\cdot$ (called addition and multiplication), such that
+
+- $(R,+,0)$ is an abelian group,
+- multiplication is associative (for this course), and
+- the distributive property holds, i.e. for all elements $x,y \in R$, $x \cdot (y + z) = x \cdot y + x \cdot z$.
+!end
+
+!defn{Commutative ring}
+$R$ is called a **commutative ring** if its multiplication is commutative. $R$ is called a **ring with identity** if it has an element $1 \in R$ such that $1 \cdot x = x \cdot 1 = x$ for all elements $x \in R$.
+!end
+
+!ex
+$(\mathbb{Z}, +, \cdot, 0, 1)$ is a commutative ring with identity. The same holds for $\mathbb{Q}$, $\mathbb{R}$, and $\mathbb{C}$. Note, though, that most elements of $\mathbb{Z}$ don't have multiplicative inverses.
+!end
+
+!defn
+In any ring $R$ with identity element $1$, we say that $x$ has a multiplicative inverse if there exists an element $y \in R$ such that $x \cdot y = y \cdot x = 1$. Such elements $x$ are called the **units** of $R$. The set of these units of $R$ is typically denoted $R^{\times}$.
+!end
+
+!prop
+$(R^{\times}, \cdot, 1)$ forms a group.
+
+!proof
+First, we must show that $R^{\times}$ is closed under $\cdot$. Consider $a,b \in R^{\times}$. They must have inverses $u,v$. Thus, $v \cdot u$ is an inverse for $a \cdot b$, so $ab \equiv a \cdot b \in R^{\times}$.
+
+Associativity follows automatically from the definition of $\cdot$.
+
+$R^{\times}$ has an identity element since $1 \cdot 1 = 1 \in R^{\times}$.
+
+Last, we must show that all elements' inverses are in $R^{\times}$. Consider $a \in R^\times$. There must exist $u$ such that $au = ua = 1$. Then, the inverse of $u$ is $a$, so $u$ is also a unit.
+!end
+!end
+
+!defn
+Let $R$ be a commutative ring. Define $M_n (R)$, the ring of $n \times n$ matrices over $R$, as follows.
+
+- The elements are $n \times n$ arrays of elements of $R$, denoted $(a_{ij})$.
+- Addition of elements is term-by-term, i.e. $(a+b)_{ij}=a_{ij}+b_{ij}$.
+- Multiplication of matrices $A = (a_{ij})$ and $B = (b_{ij})$ is such that the $i,k$ entry of $A\cdot B$ is given by
+  \[
+    (A \cdot B)_{ij} = \sum_{j=1}^{n} a_{ij} b_{jk}.
+  \]
+- The zero matrix is $(a_{ij})$ such that $a_{ij}=0_R$ for all $i,j$, where $0_R$ is the additive identity of $R$.
+- If $R$ has a multiplicative identity $1_R$, then $M_n(R)$ has an identity matrix given by
+  \[
+    I_R = \left( \begin{array}{cccc}
+      1_R & 0_R & \cdots & 0_R \\
+      0_R & 1_R & \cdots & 0_R \\
+      \vdots & \vdots & \ddots & \vdots \\
+      0_R & 0_R & \cdots & 1_R
+    \end{array} \right)
+  \]
+!end
+
+Note: even if $R$ is commutative, $M_n (R)$ is non-commutative for $n \geq 2$.
+
+!defn
+Let $R$ be a commutative ring with identity $(1)$. The group of units of $M_n (R)$ is called the group of **invertible matrices**, and also the **general linear group** $GL_n(R)$.
+!end
+
+It is a fact that for a commutative ring with identity $R$, a matrix $A \in M_n(R)$ is invertible iff $\det A$ is invertible (i.e. if $\det A \in R^\times$). As an example of this, consider the ring $R = \mathbb{R}$ or $\mathbb{C}$. $R^\times = \{ x \in R \,|\, x \neq 0 \}$, so this fact tells us that a matrix $A \in GL_n(R)$ iff $\det A \neq 0$, which agrees with facts we know from linear algebra.
+
+# Fields
+!defn{Field}
+A **field** is a commutative ring with identity in which every nonzero element has a multiplicative inverse. Examples include $\mathbb{Q}$, $\mathbb{R}$, and $\mathbb{C}$.
+!end
+
+!defn{Congruence}
+Let $n \in \mathbb{Z}$, $n \neq 0$. We say $x,y \in \mathbb{Z}$ are **congruent modulo** $n$ if there exists an element $k \in \mathbb{Z}$ such that $x - y = k n$. This is denoted $x \equiv y \ \text{mod}\ n$.
+!end
+
+!thm{Division Theorem}
+For all $x \in \mathbb{Z}$, there exists a unique $q, r \in \mathbb{Z}$ with $0 \leq r < n$ so that
+\[ x = n \cdot q + r. \]
+In this case, we call $x$ the "dividend", $n$ the "divisor", $q$ the "quotient", and $r$ the "remainder".
+!end
+
+Every $x \in \mathbb{Z}$ is congruent module $n$ to one and only one value among the set $\{ 0, 1, \cdots, n-1 \}$. This value is the remainder $r$.
+
+We can provisionally define $\mathbb{Z}_n$ to be the set of $n$ congruence classes. The addition and multiplication from $\mathbb{Z}$ extend mod $n$ to make $\mathbb{Z}_n$ a commutative ring with identity.
+
+!ex
+- $4 + 9 \equiv 1$ in $\mathbb{Z}_{12}$.
+- $7 \cdot 8 \equiv 8 = 1 \cdot 8$ in $\mathbb{Z}_{12}$, but $7 \not\equiv 1$.
+- $3 \cdot 4 = 12 \equiv 0 \ \text{mod}\ 12$, so you can have $x \cdot y = 0$ for $x \neq 0$ and $y \neq 0$.
+!end
+
+!defn{Domain}
+A commutative ring with identity $D$ is an **integral domain** (or simply a **domain**) if, for all $x,y \in D$, $xy = 0$ implies that $x = 0$ or $y = 0$.
+!end
+
+!prop
+Every field is a domain.
+!proof
+In a field, assume $xy = 0$. If $x = 0$, we are done. If $x \neq 0$, then there exists $x^{-1}$ such that $x^{-1} \cdot x = 1$. Thus, $xy = 0 \implies x^{-1} x y = x^{-1} \cdot 0 \implies y = 0$.
+!end
+!end
+
+It is left to the reader as an exercise to show that if $p$ is prime, then $\mathbb{Z}_p$ is a field, and if $p$ is not prime, then $\mathbb{Z}_p$ is not a domain (and therefore not a field).
